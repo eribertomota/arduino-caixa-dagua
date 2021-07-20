@@ -27,6 +27,10 @@ int intervalo = 2000;
 // 1 habilita, 0 desabilita
 int cx2 = 0;
 
+// Habilita som
+// 1 habilita, 0 desabilita
+int som = 1;
+
 // ###################
 // Definições internas
 // ###################
@@ -128,7 +132,7 @@ void teste_inicial()
   for (int i = 0; i <= 5; i++) {
     digitalWrite(LEDTEST[i], HIGH);
     digitalWrite(LEDTEST[ii], HIGH);
-    tone(9,400,300);
+    if ( som == 1 ) { tone(9,400,300); }
     delay(1000);
     digitalWrite(LEDTEST[i], LOW);
     digitalWrite(LEDTEST[ii], LOW);
@@ -159,40 +163,48 @@ void teste_inicial()
 // Alerta emitido cada vez que o nível da água abaixa
 void alerta_baixa_nivel()
 {
-  for (int i = 0; i <= 2; i++) {
-      tone(9,800,200);
-      delay(1000);
+  if ( som == 1 ) {
+    for (int i = 0; i <= 2; i++) {
+        tone(9,800,200);
+        delay(1000);
+    }
   }
 }
 
 // Alerta de caixa 100% cheia
 void alerta_caixa_cheia()
 {
-  tone(9,200,300);
-  delay(1000);
-  tone(9,300,600);
-  delay(1000);
-  tone(9,800,900);
-  delay(1000);
+  if ( som == 1 ) {
+    tone(9,200,300);
+    delay(1000);
+    tone(9,300,600);
+    delay(1000);
+    tone(9,800,900);
+    delay(1000);
+  }
 }
 
 // Alerta de caixa enchendo, 20%
 void alerta_caixa_20()
 {
-  for (int i = 0; i <= 9; i++) {
-    tone(9,1000,100);
-    delay(250);
+  if ( som == 1 ) {
+    for (int i = 0; i <= 9; i++) {
+      tone(9,1000,100);
+      delay(250);
+    }
   }
 }
 
 // Alerta de caixa vazia
 void alerta_caixa_vazia()
 {
-  for (int i = 0; i <= 9; i++) {
-    tone(9,400,300);
-    delay(250);
-    tone(9,800,300);
-    delay(1000);
+  if ( som == 1 ) {
+    for (int i = 0; i <= 9; i++) {
+      tone(9,400,300);
+      delay(250);
+      tone(9,800,300);
+      delay(1000);
+    }
   }
 }
 
@@ -265,7 +277,7 @@ void medicao_caixa1()
     delay(250);
 
     // Beep a cada passagem
-    tone(9,240,40);
+    if ( som == 1 ) { tone(9,240,40); }
   }
 
   // Caixa1, inferior, 20%
@@ -365,7 +377,7 @@ void medicao_caixa2()
     delay(250);
 
     // Beep a cada passagem
-    tone(9,240,40);
+    if ( som == 1 ) { tone(9,240,40); }
   }
 
   // Caixa2, superior, 20%
