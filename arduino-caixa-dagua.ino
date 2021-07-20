@@ -7,13 +7,13 @@
 // Definições iniciais
 // ###################
 
-// Caixa1, inferior, distâncias
+// Caixa1, inferior, distâncias em centímetros
 
 int percent1_100 = 3;
 int percent1_50  = 4;
 int percent1_20  = 5;
 
-// Caixa2, superior, distâncias
+// Caixa2, superior, distâncias em centímetros
 
 int percent2_100 = 17;
 int percent2_50  = 19;
