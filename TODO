@@ -4,3 +4,6 @@
 * Fotos do monitor serial no notebook
 * Fotos da tubulação antes e depois da instalação
 * No código fonte, explicações também em inglês
+* Inserir uma verificação de erro na leitura pelos sensores. Nesse caso,
+  os LEDs piscarão continuamente.
+  
