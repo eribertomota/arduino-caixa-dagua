@@ -20,8 +20,11 @@ int percent2_50  = 19;
 int percent2_20  = 21;
 
 // Medição a cada "x" milisegundos (1000 = 1 segundo)
+// 'int' vai até 32.767 (= 32 segundos)
+// 'long' vai até 2.147.483.647 (= 2.147.483 segundos, = 24.8 dias)
+// default = 5 minutos (300 segundos)
 
-int intervalo = 2000;
+long intervalo = 300000;
 
 // Habilita Caixa2, superior
 // 1 habilita, 0 desabilita
