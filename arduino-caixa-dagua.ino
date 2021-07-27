@@ -69,10 +69,14 @@ int control1 = 0;  // Controle do alarme de caixa cheia (caixa inferior)
 int control2 = 0;  // Controle do alarme de caixa enchendo, 20% (caixa inferior)
 int control3 = 0;  // Controle do alarme de caixa cheia (caixa superior)
 int control4 = 0;  // Controle do alarme de caixa enchendo, 20% (caixa superior)
-int duration1 = 0; // Controle sensor 1 (caixa inferior)
-int distance1 = 0; // Controle sensor 1 (caixa inferior)
-int duration2 = 0; // Controle sensor 2 (caixa superior)
-int distance2 = 0; // Controle sensor 2 (caixa superior)
+int duration1  = 0; // Controle sensor 1 (caixa inferior)
+int duration1a = 0; // Controle sensor 1 (caixa inferior)
+int distance1  = 0; // Controle sensor 1 (caixa inferior)
+int distance1a = 0; // Controle sensor 1 (caixa inferior)
+int duration2  = 0; // Controle sensor 2 (caixa superior)
+int duration2a = 0; // Controle sensor 2 (caixa superior)
+int distance2  = 0; // Controle sensor 2 (caixa superior)
+int distance2a = 0; // Controle sensor 2 (caixa superior)
 
 void setup() 
 {
@@ -220,7 +224,7 @@ void medicao_caixa1()
   // CAIXA 1, inferior
   // #################
   
-  // Sensor1
+  // Sensor1 - dupla leitura
   digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin1, HIGH);
@@ -228,8 +232,28 @@ void medicao_caixa1()
   digitalWrite(trigPin1, LOW);  
   duration1 = pulseIn(echoPin1, HIGH);
   distance1 = duration1/58.2;
+
+  delay(3000);
+  
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin1, LOW);  
+  duration1a = pulseIn(echoPin1, HIGH);
+  distance1a = duration1/58.2;
+  
   Serial.print("caixa inferior: ");
-  Serial.println(distance1);
+  
+  if ( distance1 = distance1a )
+  {
+    Serial.println(distance1);
+  } else 
+  {
+    Serial.print(distance1);
+    Serial.println(" ---> INVALID");
+    return;
+  }
 
   // Caixa1, inferior, 100%
   if ( distance1 <= percent1_100 )
@@ -320,16 +344,36 @@ void medicao_caixa2()
   // CAIXA 2, superior
   // #################
   
-  // Sensor2
-  digitalWrite(trigPin2, LOW);
+  // Sensor2 - dupla leitura
+  digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
-  digitalWrite(trigPin2, HIGH);
+  digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin2, LOW);  
-  duration2 = pulseIn(echoPin2, HIGH);
-  distance2 = duration2/58.2;
+  digitalWrite(trigPin1, LOW);  
+  duration2 = pulseIn(echoPin1, HIGH);
+  distance2 = duration1/58.2;
+
+  delay(3000);
+  
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin1, LOW);  
+  duration2a = pulseIn(echoPin1, HIGH);
+  distance2a = duration1/58.2;
+  
   Serial.print("caixa superior: ");
-  Serial.println(distance2);
+  
+  if ( distance2 = distance2a )
+  {
+    Serial.println(distance2);
+  } else 
+  {
+    Serial.print(distance2);
+    Serial.println(" ---> INVALID");
+    return;
+  }
 
   // Caixa2, superior, 100%
   if ( distance2 <= percent2_100 )
