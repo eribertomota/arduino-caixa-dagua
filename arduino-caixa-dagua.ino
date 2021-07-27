@@ -25,6 +25,7 @@ int percent2_20  = 21;
 // default = 5 minutos (300 segundos)
 
 long intervalo = 300000;
+// int intervalo = 3000; // for debug
 
 // Habilita Caixa2, superior
 // 1 habilita, 0 desabilita
@@ -245,17 +246,21 @@ void medicao_caixa1()
   delayMicroseconds(10);
   digitalWrite(trigPin1, LOW);
   duration1a = pulseIn(echoPin1, HIGH);
-  distance1a = duration1 / 58.2;
+  distance1a = duration1a / 58.2;
 
   Serial.print("caixa inferior: ");
 
-  if ( distance1 = distance1a )
+  if ( distance1 == distance1a )
   {
     Serial.println(distance1);
   } else
   {
     Serial.print(distance1);
-    Serial.println(" ---> INVALID");
+    Serial.print(" ---> INVALID (");
+    Serial.print(distance1);
+    Serial.print(",");
+    Serial.print(distance1a);
+    Serial.println(")");
     return;
   }
 
@@ -357,7 +362,7 @@ void medicao_caixa2()
   delayMicroseconds(10);
   digitalWrite(trigPin1, LOW);
   duration2 = pulseIn(echoPin1, HIGH);
-  distance2 = duration1 / 58.2;
+  distance2 = duration2 / 58.2;
 
   delay(3000);
 
@@ -367,17 +372,21 @@ void medicao_caixa2()
   delayMicroseconds(10);
   digitalWrite(trigPin1, LOW);
   duration2a = pulseIn(echoPin1, HIGH);
-  distance2a = duration1 / 58.2;
+  distance2a = duration2a / 58.2;
 
   Serial.print("caixa superior: ");
 
-  if ( distance2 = distance2a )
+  if ( distance2 == distance2a )
   {
     Serial.println(distance2);
   } else
   {
     Serial.print(distance2);
-    Serial.println(" ---> INVALID");
+    Serial.print(" ---> INVALID (");
+    Serial.print(distance2);
+    Serial.print(",");
+    Serial.print(distance2a);
+    Serial.println(")");
     return;
   }
 
