@@ -78,43 +78,43 @@ int duration2a = 0; // Controle sensor 2 (caixa superior)
 int distance2  = 0; // Controle sensor 2 (caixa superior)
 int distance2a = 0; // Controle sensor 2 (caixa superior)
 
-void setup() 
+void setup()
 {
   // Buzzer
 
-  pinMode(8,OUTPUT); // painel portaria
+  pinMode(8, OUTPUT); // painel portaria
 
   // Sensor1
-  
-  pinMode(trigPin1,OUTPUT);
-  pinMode(echoPin1,INPUT);
+
+  pinMode(trigPin1, OUTPUT);
+  pinMode(echoPin1, INPUT);
 
   // Sensor2
-  
-  pinMode(trigPin2,OUTPUT);
-  pinMode(echoPin2,INPUT);
+
+  pinMode(trigPin2, OUTPUT);
+  pinMode(echoPin2, INPUT);
 
   // LEDs
-  
-  pinMode(LED1,OUTPUT);
-  pinMode(LED2,OUTPUT);
-  pinMode(LED3,OUTPUT);
-  pinMode(LED4,OUTPUT);
-  pinMode(LED5,OUTPUT);
-  pinMode(LED6,OUTPUT);
-  pinMode(LED7,OUTPUT);
-  pinMode(LED8,OUTPUT);
-  pinMode(LED9,OUTPUT);
-  pinMode(LED10,OUTPUT);
-  pinMode(LED11,OUTPUT);
-  pinMode(LED12,OUTPUT);
-    
+
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+  pinMode(LED6, OUTPUT);
+  pinMode(LED7, OUTPUT);
+  pinMode(LED8, OUTPUT);
+  pinMode(LED9, OUTPUT);
+  pinMode(LED10, OUTPUT);
+  pinMode(LED11, OUTPUT);
+  pinMode(LED12, OUTPUT);
+
   // Serial
-  
+
   Serial.begin(9600);
 
   // Ativa teste inicial
-  
+
   teste_inicial();
 }
 
@@ -124,7 +124,9 @@ void loop()
   medicao_caixa1();
 
   // Caixa2, superior, apenas se estiver habilitada
-  if ( cx2 == 1 ) { medicao_caixa2(); }
+  if ( cx2 == 1 ) {
+    medicao_caixa2();
+  }
 
   // Intervalo de medição
   delay(intervalo);
@@ -134,12 +136,14 @@ void loop()
 void teste_inicial()
 {
   int ii = 6;
-  int LEDTEST[12] = {LED1,LED2,LED3,LED4,LED5,LED6,LED7,LED8,LED9,LED10,LED11,LED12};
-  
+  int LEDTEST[12] = {LED1, LED2, LED3, LED4, LED5, LED6, LED7, LED8, LED9, LED10, LED11, LED12};
+
   for (int i = 0; i <= 5; i++) {
     digitalWrite(LEDTEST[i], HIGH);
     digitalWrite(LEDTEST[ii], HIGH);
-    if ( som == 1 ) { tone(9,400,300); }
+    if ( som == 1 ) {
+      tone(9, 400, 300);
+    }
     delay(1000);
     digitalWrite(LEDTEST[i], LOW);
     digitalWrite(LEDTEST[ii], LOW);
@@ -148,21 +152,21 @@ void teste_inicial()
   }
 
   // Acende todos os LEDs
-  
+
   for (int i = 0; i <= 2; i++) {
     digitalWrite(LEDTEST[i], HIGH);
   }
   for (int i = 6; i <= 8; i++) {
     digitalWrite(LEDTEST[i], HIGH);
   }
-  
+
   if ( cx2 == 1 ) {
-      for (int i = 2; i <= 5; i++) {
-        digitalWrite(LEDTEST[i], HIGH);
-      }
-      for (int i = 9; i <= 11; i++) {
-        digitalWrite(LEDTEST[i], HIGH);
-      }     
+    for (int i = 2; i <= 5; i++) {
+      digitalWrite(LEDTEST[i], HIGH);
+    }
+    for (int i = 9; i <= 11; i++) {
+      digitalWrite(LEDTEST[i], HIGH);
+    }
   }
   delay(2000);
 }
@@ -172,8 +176,8 @@ void alerta_baixa_nivel()
 {
   if ( som == 1 ) {
     for (int i = 0; i <= 2; i++) {
-        tone(9,800,200);
-        delay(1000);
+      tone(9, 800, 200);
+      delay(1000);
     }
   }
 }
@@ -182,11 +186,11 @@ void alerta_baixa_nivel()
 void alerta_caixa_cheia()
 {
   if ( som == 1 ) {
-    tone(9,200,300);
+    tone(9, 200, 300);
     delay(1000);
-    tone(9,300,600);
+    tone(9, 300, 600);
     delay(1000);
-    tone(9,800,900);
+    tone(9, 800, 900);
     delay(1000);
   }
 }
@@ -196,7 +200,7 @@ void alerta_caixa_20()
 {
   if ( som == 1 ) {
     for (int i = 0; i <= 9; i++) {
-      tone(9,1000,100);
+      tone(9, 1000, 100);
       delay(250);
     }
   }
@@ -207,9 +211,9 @@ void alerta_caixa_vazia()
 {
   if ( som == 1 ) {
     for (int i = 0; i <= 9; i++) {
-      tone(9,400,300);
+      tone(9, 400, 300);
       delay(250);
-      tone(9,800,300);
+      tone(9, 800, 300);
       delay(1000);
     }
   }
@@ -223,32 +227,32 @@ void medicao_caixa1()
   // #################
   // CAIXA 1, inferior
   // #################
-  
+
   // Sensor1 - dupla leitura
   digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);  
+  digitalWrite(trigPin1, LOW);
   duration1 = pulseIn(echoPin1, HIGH);
-  distance1 = duration1/58.2;
+  distance1 = duration1 / 58.2;
 
   delay(3000);
-  
+
   digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);  
+  digitalWrite(trigPin1, LOW);
   duration1a = pulseIn(echoPin1, HIGH);
-  distance1a = duration1/58.2;
-  
+  distance1a = duration1 / 58.2;
+
   Serial.print("caixa inferior: ");
-  
+
   if ( distance1 = distance1a )
   {
     Serial.println(distance1);
-  } else 
+  } else
   {
     Serial.print(distance1);
     Serial.println(" ---> INVALID");
@@ -261,9 +265,9 @@ void medicao_caixa1()
     digitalWrite(LED1, HIGH);
     digitalWrite(LED7, HIGH);
     if ( control1 != 0 )
-    {      
+    {
       control1 = 0;
-      alerta_caixa_cheia();      
+      alerta_caixa_cheia();
     }
   }
   else
@@ -271,11 +275,11 @@ void medicao_caixa1()
     digitalWrite(LED1, HIGH); // Pisca o LED a cada passagem
     digitalWrite(LED7, HIGH); // Pisca o LED a cada passagem
     delay(30);
-    
+
     if ( control1 == 0 )
     {
       control1 = 1;
-      alerta_baixa_nivel();      
+      alerta_baixa_nivel();
     }
     digitalWrite(LED1, LOW);
     digitalWrite(LED7, LOW);
@@ -304,7 +308,9 @@ void medicao_caixa1()
     delay(250);
 
     // Beep a cada passagem
-    if ( som == 1 ) { tone(9,240,40); }
+    if ( som == 1 ) {
+      tone(9, 240, 40);
+    }
   }
 
   // Caixa1, inferior, 20%
@@ -343,32 +349,32 @@ void medicao_caixa2()
   // #################
   // CAIXA 2, superior
   // #################
-  
+
   // Sensor2 - dupla leitura
   digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);  
+  digitalWrite(trigPin1, LOW);
   duration2 = pulseIn(echoPin1, HIGH);
-  distance2 = duration1/58.2;
+  distance2 = duration1 / 58.2;
 
   delay(3000);
-  
+
   digitalWrite(trigPin1, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin1, HIGH);
   delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);  
+  digitalWrite(trigPin1, LOW);
   duration2a = pulseIn(echoPin1, HIGH);
-  distance2a = duration1/58.2;
-  
+  distance2a = duration1 / 58.2;
+
   Serial.print("caixa superior: ");
-  
+
   if ( distance2 = distance2a )
   {
     Serial.println(distance2);
-  } else 
+  } else
   {
     Serial.print(distance2);
     Serial.println(" ---> INVALID");
@@ -381,9 +387,9 @@ void medicao_caixa2()
     digitalWrite(LED4, HIGH);
     digitalWrite(LED10, HIGH);
     if ( control3 != 0 )
-    {      
+    {
       control3 = 0;
-      alerta_caixa_cheia();      
+      alerta_caixa_cheia();
     }
   }
   else
@@ -391,11 +397,11 @@ void medicao_caixa2()
     digitalWrite(LED4, HIGH); // Pisca o LED a cada passagem
     digitalWrite(LED10, HIGH); // Pisca o LED a cada passagem
     delay(30);
-    
+
     if ( control3 == 0 )
     {
       control3 = 1;
-      alerta_baixa_nivel();      
+      alerta_baixa_nivel();
     }
     digitalWrite(LED4, LOW);
     digitalWrite(LED10, LOW);
@@ -424,7 +430,9 @@ void medicao_caixa2()
     delay(250);
 
     // Beep a cada passagem
-    if ( som == 1 ) { tone(9,240,40); }
+    if ( som == 1 ) {
+      tone(9, 240, 40);
+    }
   }
 
   // Caixa2, superior, 20%
