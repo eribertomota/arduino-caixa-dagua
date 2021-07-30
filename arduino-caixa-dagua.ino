@@ -25,15 +25,25 @@ int percent2_30 = 21;
 // default = 5 minutos (300 segundos)
 
 long intervalo = 300000;
-// int intervalo = 3000; // for debug
+// int intervalo = 3000; // usar em caso de debug, comentando o anterior
 
 // Habilita Caixa2, superior
 // 1 habilita, 0 desabilita
 int cx2 = 0;
 
-// Habilita som
+// Habilita som (todos os sons para todas as caixas e eventos)
 // 1 habilita, 0 desabilita
 int som = 1;
+
+// Desabilita parte do som para a caixa superior
+// É normal a caixa superior esvaziar e encher várias vezes ao dia.
+// Não é interessante que isso fique tocando todo o tempo para 80% e
+// 50%. O beep também será desabilitado.
+// 1 habilita, 0 desabilita
+int somcxsup80 = 0;   // 80%
+int somcxsup50 = 0;   // 50%
+int somcxsup30 = 1;   // 30%
+int beepcxsup  = 0;   // beep a cada passagem
 
 // ###################
 // Definições internas
@@ -398,7 +408,9 @@ void medicao_caixa2()
     if ( control3 != 0 )
     {
       control3 = 0;
-      alerta_caixa_cheia();
+      if ( somcxsup80 == 1 ) {
+        alerta_caixa_cheia();
+      }
     }
   }
   else
@@ -410,7 +422,9 @@ void medicao_caixa2()
     if ( control3 == 0 )
     {
       control3 = 1;
-      alerta_baixa_nivel();
+      if ( somcxsup80 == 1 ) {
+        alerta_baixa_nivel();
+      }
     }
     digitalWrite(LED4, LOW);
     digitalWrite(LED10, LOW);
@@ -432,14 +446,16 @@ void medicao_caixa2()
     if ( control3 == 1 )
     {
       control3 = 2;
-      alerta_baixa_nivel();
+      if ( somcxsup50 == 1 ) {
+        alerta_baixa_nivel();
+      }
     }
     digitalWrite(LED5, LOW);
     digitalWrite(LED11, LOW);
     delay(250);
 
     // Beep a cada passagem
-    if ( som == 1 ) {
+    if ( som == 1 && somcxsup50 == 1 ) {
       tone(9, 240, 40);
     }
   }
@@ -451,7 +467,9 @@ void medicao_caixa2()
     {
       control3 = 2;
       control4 = 0;
-      alerta_caixa_30();
+      if ( somcxsup30 == 1 ) {
+        alerta_caixa_30();
+      }
     }
     digitalWrite(LED6, HIGH);
     digitalWrite(LED12, HIGH);
@@ -466,10 +484,18 @@ void medicao_caixa2()
     {
       control3 = 3;
       control4 = 1;
-      alerta_caixa_vazia();
+      if ( somcxsup30 == 1 ) {
+        alerta_caixa_vazia();
+      }
     }
     digitalWrite(LED6, LOW);
     digitalWrite(LED12, LOW);
     delay(250);
+
+    // Beep a cada passagem, caso não esteja ocorrendo em 50%
+    if ( som == 1 && somcxsup50 == 0 && somcxsup30 == 1 ) {
+      tone(9, 240, 40);
+    }
   }
+
 }
