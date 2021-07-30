@@ -9,15 +9,15 @@
 
 // Caixa1, inferior, distâncias em centímetros
 
-int percent1_100 = 3;
-int percent1_50  = 4;
-int percent1_20  = 5;
+int percent1_80 = 66;
+int percent1_50 = 139;
+int percent1_30 = 187;
 
 // Caixa2, superior, distâncias em centímetros
 
-int percent2_100 = 17;
-int percent2_50  = 19;
-int percent2_20  = 21;
+int percent2_80 = 17;
+int percent2_50 = 19;
+int percent2_30 = 21;
 
 // Medição a cada "x" milisegundos (1000 = 1 segundo)
 // 'int' vai até 32.767 (= 32 segundos)
@@ -67,9 +67,9 @@ const int LED12 = 7;  // Caixa 2, painel casa bombas
 // Reset inicial dos controles
 
 int control1 = 0;  // Controle do alarme de caixa cheia (caixa inferior)
-int control2 = 0;  // Controle do alarme de caixa enchendo, 20% (caixa inferior)
+int control2 = 0;  // Controle do alarme de caixa enchendo, 30% (caixa inferior)
 int control3 = 0;  // Controle do alarme de caixa cheia (caixa superior)
-int control4 = 0;  // Controle do alarme de caixa enchendo, 20% (caixa superior)
+int control4 = 0;  // Controle do alarme de caixa enchendo, 30% (caixa superior)
 int duration1  = 0; // Controle sensor 1 (caixa inferior)
 int duration1a = 0; // Controle sensor 1 (caixa inferior)
 int distance1  = 0; // Controle sensor 1 (caixa inferior)
@@ -183,7 +183,7 @@ void alerta_baixa_nivel()
   }
 }
 
-// Alerta de caixa 100% cheia
+// Alerta de caixa 80% cheia
 void alerta_caixa_cheia()
 {
   if ( som == 1 ) {
@@ -196,8 +196,8 @@ void alerta_caixa_cheia()
   }
 }
 
-// Alerta de caixa enchendo, 20%
-void alerta_caixa_20()
+// Alerta de caixa enchendo, 30%
+void alerta_caixa_30()
 {
   if ( som == 1 ) {
     for (int i = 0; i <= 9; i++) {
@@ -264,8 +264,8 @@ void medicao_caixa1()
     return;
   }
 
-  // Caixa1, inferior, 100%
-  if ( distance1 <= percent1_100 )
+  // Caixa1, inferior, 80%
+  if ( distance1 <= percent1_80 )
   {
     digitalWrite(LED1, HIGH);
     digitalWrite(LED7, HIGH);
@@ -318,14 +318,14 @@ void medicao_caixa1()
     }
   }
 
-  // Caixa1, inferior, 20%
-  if ( distance1 <= percent1_20 )
+  // Caixa1, inferior, 30%
+  if ( distance1 <= percent1_30 )
   {
     if ( control2 == 1 )
     {
       control1 = 2;
       control2 = 0;
-      alerta_caixa_20();
+      alerta_caixa_30();
     }
     digitalWrite(LED3, HIGH);
     digitalWrite(LED9, HIGH);
@@ -390,8 +390,8 @@ void medicao_caixa2()
     return;
   }
 
-  // Caixa2, superior, 100%
-  if ( distance2 <= percent2_100 )
+  // Caixa2, superior, 80%
+  if ( distance2 <= percent2_80 )
   {
     digitalWrite(LED4, HIGH);
     digitalWrite(LED10, HIGH);
@@ -444,14 +444,14 @@ void medicao_caixa2()
     }
   }
 
-  // Caixa2, superior, 20%
-  if ( distance2 <= percent2_20 )
+  // Caixa2, superior, 30%
+  if ( distance2 <= percent2_30 )
   {
     if ( control4 == 1 )
     {
       control3 = 2;
       control4 = 0;
-      alerta_caixa_20();
+      alerta_caixa_30();
     }
     digitalWrite(LED6, HIGH);
     digitalWrite(LED12, HIGH);
