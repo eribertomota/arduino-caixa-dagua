@@ -279,7 +279,7 @@ void medicao_caixa1()
   }
 
   if ( distance1 != distance1a ) {
-    Serial.println("IGNORANDO medição após 3 tentativas");
+    Serial.println("caixa inferior: IGNORANDO medição após 3 tentativas");
     return;
   }
 
@@ -414,7 +414,7 @@ void medicao_caixa2()
   }
 
   if ( distance2 != distance2a ) {
-    Serial.println("IGNORANDO medição após 3 tentativas");
+    Serial.println("caixa superior: IGNORANDO medição após 3 tentativas");
     return;
   }
 
