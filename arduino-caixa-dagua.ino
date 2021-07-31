@@ -240,7 +240,7 @@ void medicao_caixa1()
   // #################
 
   // Sensor1 - dupla leitura - 3 tentativas
-  for (int loop = 0; loop <= 2; loop++) {
+  for (int i = 0; i <= 2; i++) {
     digitalWrite(trigPin1, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin1, HIGH);
@@ -375,7 +375,7 @@ void medicao_caixa2()
   // #################
 
   // Sensor2 - dupla leitura - 3 tentativas
-  for (int loop = 0; loop <= 2; loop++) {
+  for (int i = 0; i <= 2; i++) {
     digitalWrite(trigPin1, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin1, HIGH);
