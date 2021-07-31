@@ -239,38 +239,47 @@ void medicao_caixa1()
   // CAIXA 1, inferior
   // #################
 
-  // Sensor1 - dupla leitura
-  digitalWrite(trigPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);
-  duration1 = pulseIn(echoPin1, HIGH);
-  distance1 = duration1 / 58.2;
+  // Sensor1 - dupla leitura - 3 tentativas
+  for (int loop = 0; loop <= 2; loop++) {
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration1 = pulseIn(echoPin1, HIGH);
+    distance1 = duration1 / 58.2;
 
-  delay(3000);
+    delay(3000);
 
-  digitalWrite(trigPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);
-  duration1a = pulseIn(echoPin1, HIGH);
-  distance1a = duration1a / 58.2;
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration1a = pulseIn(echoPin1, HIGH);
+    distance1a = duration1a / 58.2;
 
-  Serial.print("caixa inferior: ");
+    Serial.print("caixa inferior: ");
 
-  if ( distance1 == distance1a )
-  {
-    Serial.println(distance1);
-  } else
-  {
-    Serial.print(distance1);
-    Serial.print(" ---> INVALID (");
-    Serial.print(distance1);
-    Serial.print(",");
-    Serial.print(distance1a);
-    Serial.println(")");
+    if ( distance1 == distance1a )
+    {
+      Serial.println(distance1);
+      break;
+    } else
+    {
+      Serial.print(distance1);
+      Serial.print(" ---> INVÁLIDO (");
+      Serial.print(distance1);
+      Serial.print(",");
+      Serial.print(distance1a);
+      Serial.println(")");
+
+      delay (3000);
+    }
+  }
+
+  if ( distance1 != distance1a ) {
+    Serial.println("IGNORANDO medição após 3 tentativas");
     return;
   }
 
@@ -365,38 +374,47 @@ void medicao_caixa2()
   // CAIXA 2, superior
   // #################
 
-  // Sensor2 - dupla leitura
-  digitalWrite(trigPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);
-  duration2 = pulseIn(echoPin1, HIGH);
-  distance2 = duration2 / 58.2;
+  // Sensor2 - dupla leitura - 3 tentativas
+  for (int loop = 0; loop <= 2; loop++) {
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration2 = pulseIn(echoPin1, HIGH);
+    distance2 = duration2 / 58.2;
 
-  delay(3000);
+    delay(3000);
 
-  digitalWrite(trigPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin1, LOW);
-  duration2a = pulseIn(echoPin1, HIGH);
-  distance2a = duration2a / 58.2;
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration2a = pulseIn(echoPin1, HIGH);
+    distance2a = duration2a / 58.2;
 
-  Serial.print("caixa superior: ");
+    Serial.print("caixa superior: ");
 
-  if ( distance2 == distance2a )
-  {
-    Serial.println(distance2);
-  } else
-  {
-    Serial.print(distance2);
-    Serial.print(" ---> INVALID (");
-    Serial.print(distance2);
-    Serial.print(",");
-    Serial.print(distance2a);
-    Serial.println(")");
+    if ( distance2 == distance2a )
+    {
+      Serial.println(distance2);
+      break;
+    } else
+    {
+      Serial.print(distance2);
+      Serial.print(" ---> INVÁLIDO (");
+      Serial.print(distance2);
+      Serial.print(",");
+      Serial.print(distance2a);
+      Serial.println(")");
+
+      delay (3000);
+    }
+  }
+
+  if ( distance2 != distance2a ) {
+    Serial.println("IGNORANDO medição após 3 tentativas");
     return;
   }
 
