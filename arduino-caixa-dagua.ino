@@ -93,7 +93,7 @@ void setup()
 {
   // Buzzer
 
-  pinMode(8, OUTPUT); // painel portaria
+  pinMode(9, OUTPUT); // painel portaria
 
   // Sensor1
 
