@@ -42,9 +42,9 @@ int som = 1;
 // 50%. O beep também será desabilitado.
 // 1 habilita, 0 desabilita
 int somcxsup80 = 0;   // 80%
-int somcxsup50 = 0;   // 50%
+int somcxsup50 = 1;   // 50%
 int somcxsup30 = 1;   // 30%
-int beepcxsup  = 0;   // beep a cada passagem
+int beepcxsup  = 1;   // beep a cada passagem
 
 // ###################
 // Definições internas
