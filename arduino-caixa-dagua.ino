@@ -335,6 +335,7 @@ void medicao_caixa1()
     // Beep a cada passagem
     if ( som == 1 ) {
       tone(9, 240, 60);
+      delay(100);
     }
   }
 
@@ -476,6 +477,7 @@ void medicao_caixa2()
     // Beep a cada passagem
     if ( som == 1 && somcxsup50 == 1 ) {
       tone(9, 240, 60);
+      delay(100);
     }
   }
 
