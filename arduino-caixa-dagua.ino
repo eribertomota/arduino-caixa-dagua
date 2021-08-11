@@ -515,7 +515,8 @@ void medicao_caixa2()
 
     // Beep a cada passagem, caso não esteja ocorrendo em 50%
     if ( som == 1 && somcxsup50 == 0 && somcxsup30 == 1 ) {
-      tone(9, 240, 40);
+      tone(9, 240, 60);
+      delay(300);
     }
   }
 }
