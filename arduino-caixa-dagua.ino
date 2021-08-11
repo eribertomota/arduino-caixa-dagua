@@ -377,22 +377,22 @@ void medicao_caixa2()
 
   // Sensor2 - dupla leitura - 3 tentativas
   for (int i = 0; i <= 2; i++) {
-    digitalWrite(trigPin1, LOW);
+    digitalWrite(trigPin2, LOW);
     delayMicroseconds(2);
-    digitalWrite(trigPin1, HIGH);
+    digitalWrite(trigPin2, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trigPin1, LOW);
-    duration2 = pulseIn(echoPin1, HIGH);
+    digitalWrite(trigPin2, LOW);
+    duration2 = pulseIn(echoPin2, HIGH);
     distance2 = duration2 / 58.2;
 
     delay(3000);
 
-    digitalWrite(trigPin1, LOW);
+    digitalWrite(trigPin2, LOW);
     delayMicroseconds(2);
-    digitalWrite(trigPin1, HIGH);
+    digitalWrite(trigPin2, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trigPin1, LOW);
-    duration2a = pulseIn(echoPin1, HIGH);
+    digitalWrite(trigPin2, LOW);
+    duration2a = pulseIn(echoPin2, HIGH);
     distance2a = duration2a / 58.2;
 
     Serial.print("caixa superior: ");
