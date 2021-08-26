@@ -13,12 +13,14 @@
 int percent1_80 = 66;
 int percent1_50 = 139;
 int percent1_30 = 187;
+int minimo1     = 190;
 
 // Caixa2, superior, distâncias em centímetros
 
 int percent2_80 = 17;
 int percent2_50 = 19;
 int percent2_30 = 21;
+int minimo2     = 25;
 
 // Medição a cada "x" milisegundos (1000 = 1 segundo)
 // 'int' vai até 32.767 (= 32 segundos)
@@ -26,7 +28,7 @@ int percent2_30 = 21;
 // default = 5 minutos (300 segundos)
 
 long intervalo = 300000;
-// int intervalo = 3000; // usar em caso de debug, comentando o anterior
+//int intervalo = 3000; // usar em caso de debug, comentando o anterior
 
 // Habilita Caixa2, superior
 // 1 habilita, 0 desabilita
@@ -240,8 +242,8 @@ void medicao_caixa1()
   // CAIXA 1, inferior
   // #################
 
-  // Sensor1 - dupla leitura - 3 tentativas
-  for (int i = 0; i <= 2; i++) {
+  // Sensor1 - dupla leitura - 5 tentativas
+  for (int i = 0; i <= 4; i++) {
     digitalWrite(trigPin1, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin1, HIGH);
@@ -266,6 +268,16 @@ void medicao_caixa1()
     {
       Serial.println(distance1);
       break;
+    } else if ( distance1 > minimo1 && distance1a > minimo1 ) {
+      Serial.print(distance1);
+      Serial.print(" ---> Caixa abaixo do mínimo (> " );
+      Serial.print(minimo1);
+      Serial.print("cm), medição aceita (");
+      Serial.print(distance1);
+      Serial.print(",");
+      Serial.print(distance1a);
+      Serial.println(")");
+      break;
     } else
     {
       Serial.print(distance1);
@@ -279,8 +291,8 @@ void medicao_caixa1()
     }
   }
 
-  if ( distance1 != distance1a ) {
-    Serial.println("caixa inferior: IGNORANDO medição após 3 tentativas");
+  if ( (distance1 != distance1a) && (distance1 < minimo1 && distance1a < minimo1) ) {
+    Serial.println("caixa inferior: IGNORANDO medição após 5 tentativas");
     return;
   }
 
@@ -376,8 +388,8 @@ void medicao_caixa2()
   // CAIXA 2, superior
   // #################
 
-  // Sensor2 - dupla leitura - 3 tentativas
-  for (int i = 0; i <= 2; i++) {
+  // Sensor2 - dupla leitura - 5 tentativas
+  for (int i = 0; i <= 4; i++) {
     digitalWrite(trigPin2, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin2, HIGH);
@@ -402,6 +414,16 @@ void medicao_caixa2()
     {
       Serial.println(distance2);
       break;
+    } else if ( distance2 > minimo2 && distance2a > minimo2 ) {
+      Serial.print(distance2);
+      Serial.print(" ---> Caixa abaixo do mínimo (> " );
+      Serial.print(minimo2);
+      Serial.print("cm), medição aceita (");
+      Serial.print(distance2);
+      Serial.print(",");
+      Serial.print(distance2a);
+      Serial.println(")");
+      break;
     } else
     {
       Serial.print(distance2);
@@ -415,8 +437,8 @@ void medicao_caixa2()
     }
   }
 
-  if ( distance2 != distance2a ) {
-    Serial.println("caixa superior: IGNORANDO medição após 3 tentativas");
+  if ( (distance2 != distance2a) && (distance2 < minimo2 && distance2a < minimo2) ) {
+    Serial.println("caixa superior: IGNORANDO medição após 5 tentativas");
     return;
   }
 
